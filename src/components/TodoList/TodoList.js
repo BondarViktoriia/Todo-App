@@ -1,13 +1,15 @@
-import {TodoItem,TodoText,TodoListStyle} from './TodoList.styled'
+import {TodoItem,TodoText,TodoListStyle,TodoListCheckbox,TodoListButton} from './TodoList.styled'
 
 
-const TodoList = ({ todos,onDeLeteTodo }) => {
+const TodoList = ({ todos,onDeLeteTodo,onToggleComleted }) => {
   return (
     <TodoListStyle>
-      {todos.map(({id,text}) => (
+      {todos.map(({id,text,completed}) => (
         <TodoItem key={id}>
-              <TodoText>{text}</TodoText>
-              <button type="button" onClick={()=>onDeLeteTodo(id)}> Delete</button>
+          <TodoText>{text}</TodoText>
+          <TodoListCheckbox  type="checkbox" checked={completed} onChange={()=>onToggleComleted(id)} />
+          <TodoListButton type="button" onClick={() => onDeLeteTodo(id)}> Delete</TodoListButton>
+          
         </TodoItem>
       ))}
     </TodoListStyle>

@@ -13,11 +13,33 @@ export class App extends Component {
     }))
   }
 
+  toggleComleted = todoId => {
+    this.setState(prevState => ({
+      todos: prevState.todos.map(todo => {
+        if (todo.id === todoId) {
+          return {
+            ...todo,
+            completed: !todo.completed
+          };
+        }
+        return todo;
+      })
+    }))
+  }
+
+
   render() {
     const { todos } = this.state;
+    const totalTodoCount = todos.length;
+    const comletedTodoCount = todos.reduce((total, todo) => (todo.completed ? total + 1 : total), 0);
+
     return (
       <>
-        <TodoList todos={todos} onDeLeteTodo={this.deleteTodo} />
+        <div>
+          <p>Общее количетсво:{totalTodoCount} </p>
+          <p>Количество выполненных:{comletedTodoCount} </p>
+        </div>
+        <TodoList todos={todos} onDeLeteTodo={this.deleteTodo} onToggleComleted={this.toggleComleted } />
       </>
     );
   }
