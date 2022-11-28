@@ -52,6 +52,7 @@ export const TodoListCheckbox = styled.input`
      cursor: pointer;
   width: 24px;
   height: 24px;
+ 
 `
 
 export const TodoListButton = styled.button`

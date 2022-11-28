@@ -1,5 +1,5 @@
 import {TodoItem,TodoText,TodoListStyle,TodoListCheckbox,TodoListButton} from './TodoList.styled'
-
+import PropTypes from 'prop-types';
 
 const TodoList = ({ todos,onDeLeteTodo,onToggleComleted }) => {
   return (
@@ -15,5 +15,15 @@ const TodoList = ({ todos,onDeLeteTodo,onToggleComleted }) => {
     </TodoListStyle>
   );
 };
+
+TodoList.propTypes = {
+  todos: PropTypes.arrayOf(PropTypes.exact({
+    id: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    completed:PropTypes.bool.isRequired,
+  })).isRequired,
+  onDeLeteTodo: PropTypes.func.isRequired,
+  onToggleComleted:PropTypes.func.isRequired,
+}
 
 export default TodoList;
