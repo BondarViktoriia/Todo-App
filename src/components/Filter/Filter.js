@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
+import {FilterLabel,FilterTodo,FilterInput} from './Filter.styled'
 
 const Filter = ({ value, onChange }) => {
   return (
-    <label>
-      Фильтр по имени <input type="text" value={value} onChange={onChange} />
-    </label>
+   <FilterTodo> <FilterLabel>
+      Фильтр по имени <FilterInput type="text" value={value} onChange={onChange} />
+    </FilterLabel></FilterTodo>
   );
 };
 
