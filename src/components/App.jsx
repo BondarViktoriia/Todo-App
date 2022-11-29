@@ -4,14 +4,18 @@ import { Component } from 'react';
 import TodoEditor from './TodoEditor'
 import shortid from 'shortid'
 import Filter from './Filter';
-import IconButton from './IconButton';
-import {BiBookmarkPlus} from 'react-icons/bi';
+// import IconButton from './IconButton';
+// import {BiBookmarkPlus} from 'react-icons/bi';
+import Modal from './Modal';
 
 export class App extends Component {
   state = {
     todos: [],
-    filter:'',
+    filter: '',
+    showModal: false,
   };
+
+
 
   componentDidMount() {
     console.log('App component Did Mount');
@@ -47,6 +51,8 @@ export class App extends Component {
       todos: [todo, ...prevState.todos],
     }))
 
+    this.toggleModal();
+
 
 }  
   deleteTodo = todoId => {
@@ -74,10 +80,16 @@ export class App extends Component {
   }
 
 
+  toggleModal = () => {
+    this.setState(({showModal}) => ({
+      showModal:!showModal
+    }))
+  }
+
   render() {
 
     console.log('App render');
-    const { todos,filter } = this.state;
+    const { todos,filter,showModal } = this.state;
     const totalTodoCount = todos.length;
     const comletedTodoCount = todos.reduce((total, todo) => (todo.completed ? total + 1 : total), 0);
 
@@ -87,13 +99,19 @@ export class App extends Component {
 
     return (
       <>
-        
-                  <TodoEditor onSubmit={this.addTodo} />
+         <button type='button' onClick={this.toggleModal}>Open Modal</button>
+          
+           {showModal && (
+          <Modal onClose={this.toggleModal}>
+            <TodoEditor onSubmit={this.addTodo} />
+          </Modal>
+        )}
+             
         <div>
           <p>Общее количетсво:{totalTodoCount} </p>
           <p>Количество выполненных:{comletedTodoCount} </p>
         </div>
-<IconButton><BiBookmarkPlus/></IconButton>
+        
         <Filter value={filter} onChange={this.changeFilter}  />
         <TodoList todos={filterTodos} onDeLeteTodo={this.deleteTodo} onToggleComleted={this.toggleComleted } />
       </>

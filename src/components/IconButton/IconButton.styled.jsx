@@ -10,6 +10,8 @@ export const IconButtonStyle = styled.button`
   font: inherit;
   background-color: $green;
   cursor: pointer;
+  width:40px;
+  height: 40px;
 
   display: inline-flex;
   align-items: center;
